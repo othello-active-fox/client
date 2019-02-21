@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <!-- <router-link to="/waitingroom">List Room</router-link> -->
     <router-view/>
+    <audio controls autoplay style="display:none">
+      <source src="https://www.dl-sounds.com/wp-content/uploads/edd/2018/10/Melody-in-F-preview.mp3" type="audio/mpeg">
+    </audio>
   </div>
 </template>
 
