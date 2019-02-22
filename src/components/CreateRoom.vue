@@ -25,21 +25,33 @@
 
 <script>
 
-export default { 
-  data() {
+export default {
+  data () {
     return {
       roomData: {
         roomName: '',
-        capacity: null
+        capacity: null,
+        board: {}
       }
     }
   },
   methods: {
-      createRoom() {
-        this.$store.dispatch('createRoom', this.roomData )
-        this.roomData.roomName = ''
-        this.roomData.capacity = null
+    createRoom () {
+      for (let i = 0; i <= 7; i++) {
+        for (let j = 0; j <= 7; j++) {
+          if ((i === 3 && j === 3) || (i === 4 && j === 4)) {
+            this.roomData.board[`${i}-${j}`] = 'stone white'
+          } else if ((i === 3 && j === 4) || (i === 4 && j === 3)) {
+            this.roomData.board[`${i}-${j}`] = 'stone black'
+          } else {
+            this.roomData.board[`${i}-${j}`] = null
+          }
+        }
       }
+      this.$store.dispatch('createRoom', this.roomData)
+      this.roomData.roomName = ''
+      this.roomData.capacity = null
+    }
   }
 }
 </script>
