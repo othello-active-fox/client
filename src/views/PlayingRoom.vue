@@ -7,84 +7,84 @@
           <table class="board-cells" border="1" bordercolor="#000" style="margin: 0 auto;">
             <tbody>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-3"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-4"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-0-7"></td>
+                <td @click.prevent="clickCell('0-0')" class="cell" id="cell-0-0"><div :class="getBoard['0-0']"></div></td>
+                <td @click.prevent="clickCell('0-1')" class="cell" id="cell-0-1"><div :class="getBoard['0-1']"></div></td>
+                <td @click.prevent="clickCell('0-2')" class="cell" id="cell-0-2"><div :class="getBoard['0-2']"></div></td>
+                <td @click.prevent="clickCell('0-3')" class="cell" id="cell-0-3"><div :class="getBoard['0-3']"></div></td>
+                <td @click.prevent="clickCell('0-4')" class="cell" id="cell-0-4"><div :class="getBoard['0-4']"></div></td>
+                <td @click.prevent="clickCell('0-5')" class="cell" id="cell-0-5"><div :class="getBoard['0-5']"></div></td>
+                <td @click.prevent="clickCell('0-6')" class="cell" id="cell-0-6"><div :class="getBoard['0-6']"></div></td>
+                <td @click.prevent="clickCell('0-7')" class="cell" id="cell-0-7"><div :class="getBoard['0-7']"></div></td>
               </tr>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-3"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-4"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-1-7"></td>
+                <td @click.prevent="clickCell('1-0')" class="cell" id="cell-1-0"><div :class="getBoard['1-0']"></div></td>
+                <td @click.prevent="clickCell('1-1')" class="cell" id="cell-1-1"><div :class="getBoard['1-1']"></div></td>
+                <td @click.prevent="clickCell('1-2')" class="cell" id="cell-1-2"><div :class="getBoard['1-2']"></div></td>
+                <td @click.prevent="clickCell('1-3')" class="cell" id="cell-1-3"><div :class="getBoard['1-3']"></div></td>
+                <td @click.prevent="clickCell('1-4')" class="cell" id="cell-1-4"><div :class="getBoard['1-4']"></div></td>
+                <td @click.prevent="clickCell('1-5')" class="cell" id="cell-1-5"><div :class="getBoard['1-5']"></div></td>
+                <td @click.prevent="clickCell('1-6')" class="cell" id="cell-1-6"><div :class="getBoard['1-6']"></div></td>
+                <td @click.prevent="clickCell('1-7')" class="cell" id="cell-1-7"><div :class="getBoard['1-7']"></div></td>
               </tr>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-3"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-4"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-2-7"></td>
+                <td @click.prevent="clickCell('2-0')" class="cell" id="cell-2-0"><div :class="getBoard['2-0']"></div></td>
+                <td @click.prevent="clickCell('2-1')" class="cell" id="cell-2-1"><div :class="getBoard['2-1']"></div></td>
+                <td @click.prevent="clickCell('2-2')" class="cell" id="cell-2-2"><div :class="getBoard['2-2']"></div></td>
+                <td @click.prevent="clickCell('2-3')" class="cell" id="cell-2-3"><div :class="getBoard['2-3']"></div></td>
+                <td @click.prevent="clickCell('2-4')" class="cell" id="cell-2-4"><div :class="getBoard['2-4']"></div></td>
+                <td @click.prevent="clickCell('2-5')" class="cell" id="cell-2-5"><div :class="getBoard['2-5']"></div></td>
+                <td @click.prevent="clickCell('2-6')" class="cell" id="cell-2-6"><div :class="getBoard['2-6']"></div></td>
+                <td @click.prevent="clickCell('2-7')" class="cell" id="cell-2-7"><div :class="getBoard['2-7']"></div></td>
               </tr>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-3"><div :class="getBoard['3-3']"></div></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-4"><div :class="getBoard['3-4']"></div></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-3-7"></td>
+                <td @click.prevent="clickCell('3-0')" class="cell" id="cell-3-0"><div :class="getBoard['3-0']"></div></td>
+                <td @click.prevent="clickCell('3-1')" class="cell" id="cell-3-1"><div :class="getBoard['3-1']"></div></td>
+                <td @click.prevent="clickCell('3-2')" class="cell" id="cell-3-2"><div :class="getBoard['3-2']"></div></td>
+                <td @click.prevent="clickCell('3-3')" class="cell" id="cell-3-3"><div :class="getBoard['3-3']"></div></td>
+                <td @click.prevent="clickCell('3-4')" class="cell" id="cell-3-4"><div :class="getBoard['3-4']"></div></td>
+                <td @click.prevent="clickCell('3-5')" class="cell" id="cell-3-5"><div :class="getBoard['3-5']"></div></td>
+                <td @click.prevent="clickCell('3-6')" class="cell" id="cell-3-6"><div :class="getBoard['3-6']"></div></td>
+                <td @click.prevent="clickCell('3-7')" class="cell" id="cell-3-7"><div :class="getBoard['3-7']"></div></td>
               </tr>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-3"><div :class="getBoard['4-3']"></div></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-4"><div :class="getBoard['4-4']"></div></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-4-7"></td>
+                <td @click.prevent="clickCell('4-0')" class="cell" id="cell-4-0"><div :class="getBoard['4-0']"></div></td>
+                <td @click.prevent="clickCell('4-1')" class="cell" id="cell-4-1"><div :class="getBoard['4-1']"></div></td>
+                <td @click.prevent="clickCell('4-2')" class="cell" id="cell-4-2"><div :class="getBoard['4-2']"></div></td>
+                <td @click.prevent="clickCell('4-3')" class="cell" id="cell-4-3"><div :class="getBoard['4-3']"></div></td>
+                <td @click.prevent="clickCell('4-4')" class="cell" id="cell-4-4"><div :class="getBoard['4-4']"></div></td>
+                <td @click.prevent="clickCell('4-5')" class="cell" id="cell-4-5"><div :class="getBoard['4-5']"></div></td>
+                <td @click.prevent="clickCell('4-6')" class="cell" id="cell-4-6"><div :class="getBoard['4-6']"></div></td>
+                <td @click.prevent="clickCell('4-7')" class="cell" id="cell-4-7"><div :class="getBoard['4-7']"></div></td>
               </tr>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-3"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-4"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-5-7"></td>
+                <td @click.prevent="clickCell('5-0')" class="cell" id="cell-5-0"><div :class="getBoard['5-0']"></div></td>
+                <td @click.prevent="clickCell('5-1')" class="cell" id="cell-5-1"><div :class="getBoard['5-1']"></div></td>
+                <td @click.prevent="clickCell('5-2')" class="cell" id="cell-5-2"><div :class="getBoard['5-2']"></div></td>
+                <td @click.prevent="clickCell('5-3')" class="cell" id="cell-5-3"><div :class="getBoard['5-3']"></div></td>
+                <td @click.prevent="clickCell('5-4')" class="cell" id="cell-5-4"><div :class="getBoard['5-4']"></div></td>
+                <td @click.prevent="clickCell('5-5')" class="cell" id="cell-5-5"><div :class="getBoard['5-5']"></div></td>
+                <td @click.prevent="clickCell('5-6')" class="cell" id="cell-5-6"><div :class="getBoard['5-6']"></div></td>
+                <td @click.prevent="clickCell('5-7')" class="cell" id="cell-5-7"><div :class="getBoard['5-7']"></div></td>
               </tr>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-3"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-4"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-6-7"></td>
+                <td @click.prevent="clickCell('6-0')" class="cell" id="cell-6-0"><div :class="getBoard['6-0']"></div></td>
+                <td @click.prevent="clickCell('6-1')" class="cell" id="cell-6-1"><div :class="getBoard['6-1']"></div></td>
+                <td @click.prevent="clickCell('6-2')" class="cell" id="cell-6-2"><div :class="getBoard['6-2']"></div></td>
+                <td @click.prevent="clickCell('6-3')" class="cell" id="cell-6-3"><div :class="getBoard['6-3']"></div></td>
+                <td @click.prevent="clickCell('6-4')" class="cell" id="cell-6-4"><div :class="getBoard['6-4']"></div></td>
+                <td @click.prevent="clickCell('6-5')" class="cell" id="cell-6-5"><div :class="getBoard['6-5']"></div></td>
+                <td @click.prevent="clickCell('6-6')" class="cell" id="cell-6-6"><div :class="getBoard['6-6']"></div></td>
+                <td @click.prevent="clickCell('6-7')" class="cell" id="cell-6-7"><div :class="getBoard['6-7']"></div></td>
               </tr>
               <tr>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-0"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-1"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-2"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-3"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-4"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-5"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-6"></td>
-                <td @click.prevent="clickCell" class="cell" id="cell-7-7"></td>
+                <td @click.prevent="clickCell('7-0')" class="cell" id="cell-7-0"><div :class="getBoard['7-0']"></div></td>
+                <td @click.prevent="clickCell('7-1')" class="cell" id="cell-7-1"><div :class="getBoard['7-1']"></div></td>
+                <td @click.prevent="clickCell('7-2')" class="cell" id="cell-7-2"><div :class="getBoard['7-2']"></div></td>
+                <td @click.prevent="clickCell('7-3')" class="cell" id="cell-7-3"><div :class="getBoard['7-3']"></div></td>
+                <td @click.prevent="clickCell('7-4')" class="cell" id="cell-7-4"><div :class="getBoard['7-4']"></div></td>
+                <td @click.prevent="clickCell('7-5')" class="cell" id="cell-7-5"><div :class="getBoard['7-5']"></div></td>
+                <td @click.prevent="clickCell('7-6')" class="cell" id="cell-7-6"><div :class="getBoard['7-6']"></div></td>
+                <td @click.prevent="clickCell('7-7')" class="cell" id="cell-7-7"><div :class="getBoard['7-7']"></div></td>
               </tr>
             </tbody>
           </table>
@@ -96,6 +96,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      board: {}
+    }
+  },
   created() {
     for (let i = 0; i <= 7; i++) {
       for (let j = 0; j <= 7; j++) {
@@ -108,16 +113,16 @@ export default {
         }
       }
     }
-
     // console.log(this.board)
   },
+  methods: {
+    clickCell(id) {
+      console.log(id);
+      this.board[id] = 'stone white'
+      console.log(this.board);
 
-  data() {
-    return {
-      board: {}
     }
   },
-
   computed: {
     getBoard() {
       return this.board
