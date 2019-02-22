@@ -68,7 +68,7 @@ export default {
           // color = 'black'
           localStorage.setItem('color', 'black')
         }
-        this.$store.dispatch('updateRoomDatas', {id: this.selectedRoom.id, value: this.selectedRoom })
+        this.$store.dispatch('updateRoomDatas', { id: this.selectedRoom.id, value: this.selectedRoom })
         this.$store.dispatch('setUser', {
           room: value.room,
           username: value.username,
