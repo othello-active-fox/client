@@ -48,7 +48,8 @@ export default new Vuex.Store({
           roomName: dataObj.roomName,
           capacity: dataObj.capacity,
           players: [],
-          board: dataObj.board
+          board: dataObj.board,
+          turn: dataObj.turn
         })
         .then((docRef) => {
           console.log('success')
