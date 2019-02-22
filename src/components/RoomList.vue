@@ -74,6 +74,9 @@ export default {
           username: value.username,
           stone: color
         })
+
+        var unsubscribe = db.collection('Rooms').onSnapshot(function () {})
+        unsubscribe()
         this.$router.push({ path: `/waitingroom/${this.selectedRoom.id}` })
       }
     },

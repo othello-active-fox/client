@@ -53,17 +53,7 @@ export default new Vuex.Store({
         })
         .then((docRef) => {
           console.log('success')
-          return db
-            .collection('Rooms')
-            .get()
-        })
-        .then(snapshot => {
-          let data = []
-          snapshot.forEach(doc => {
-            data.unshift({ id: doc.id, ...doc.data() })
-          })
-          commit('mutateRoom', data)
-          // console.log(data, '=============================')
+          console.log(docRef, '=============================')
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
