@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    roomDatas: {},
     roomList: [],
     playermove: 'smile',
     playerscore: 0,
@@ -20,6 +21,10 @@ export default new Vuex.Store({
     },
     mutateDataUser (state, payload) {
       state.dataUser = payload
+    },
+    getRoomDatas(state, payload) {
+      state.roomDatas = payload
+      console.log(payload);
     }
   },
   actions: {
@@ -73,6 +78,13 @@ export default new Vuex.Store({
     },
     setUser ({ commit }, payload) {
       commit('mutateDataUser', payload)
-    }
+    },
+    getRoomDatas({ commit }, payload) { //masih hardcode
+      db
+        .collection("Rooms").doc(payload)
+        .onSnapshot(function(doc) {
+          commit('getRoomDatas', doc.data())
+        });
+    },
   }
 })

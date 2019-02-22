@@ -31,6 +31,7 @@ export default {
       roomData: {
         roomName: '',
         capacity: null,
+        turn: 'white',
         board: {}
       }
     }

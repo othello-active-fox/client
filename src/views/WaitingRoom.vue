@@ -74,7 +74,7 @@ export default {
         .onSnapshot(doc => {
           // console.log(doc.data().players, '{}{}{}{}{}{}{}')
           if (doc.data().players.length === 2) {
-            this.$router.push({ path: `/playingroom` })
+            this.$router.push({ path: `/playingroom/${this.$route.params.id}` })
           }
         })
     }
