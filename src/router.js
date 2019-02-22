@@ -12,12 +12,12 @@ export default new Router({
       component: Home
     },
     {
-      path: '/waitingroom',
+      path: '/waitingroom/:id',
       name: 'waitingRoom',
       component: () => import('./views/WaitingRoom.vue')
     },
     {
-      path: '/playingroom',
+      path: '/playingroom/:id',
       name: 'playingroom',
       component: () => import('./views/PlayingRoom.vue')
     }

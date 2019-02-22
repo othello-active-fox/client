@@ -54,21 +54,27 @@ export default {
         })
     },
     enteringPlayer (value) {
+      let color = null
       if (this.selectedRoom.players.length >= 2) {
         alert('room penuh')
       } else {
         this.dialog = false
         if (!this.selectedRoom.players.length) {
           this.selectedRoom.players.push({ name: value.username, stone: 'white' })
+          // color = 'white'
+          localStorage.setItem('color', 'white')
         } else {
           this.selectedRoom.players.push({ name: value.username, stone: 'black' })
+          // color = 'black'
+          localStorage.setItem('color', 'black')
         }
         this.updateRoom(this.selectedRoom)
         this.$store.dispatch('setUser', {
           room: value.room,
-          username: value.username
+          username: value.username,
+          stone: color
         })
-        this.$router.push({ path: `/waitingroom` })
+        this.$router.push({ path: `/waitingroom/${this.selectedRoom.id}` })
       }
     },
     updateRoom (value) {
