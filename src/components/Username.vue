@@ -15,7 +15,7 @@
             class="button"
             style="background:blue; color:white;"
             >
-            create
+            join
             </v-btn>
 
         </v-form>

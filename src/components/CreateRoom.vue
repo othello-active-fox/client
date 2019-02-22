@@ -10,7 +10,6 @@
                   <v-layout>
                     <v-flex >
                       <v-text-field style="width:280px;" label="Room Name" solo v-model="roomData.roomName"></v-text-field>
-                      <v-text-field style="width:280px;" label="Capacity" solo v-model="roomData.capacity"></v-text-field>
                     </v-flex>
                   </v-layout>
                 </v-container>

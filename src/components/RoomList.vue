@@ -26,6 +26,7 @@
 <script>
 import db from '@/api/firestore.js'
 import Username from '@/components/Username.vue'
+import swal from 'sweetalert'
 
 export default {
   data () {
@@ -56,7 +57,7 @@ export default {
     enteringPlayer (value) {
       let color = null
       if (this.selectedRoom.players.length >= 2) {
-        alert('room penuh')
+        swal('room penuh')
       } else {
         this.dialog = false
         if (!this.selectedRoom.players.length) {
