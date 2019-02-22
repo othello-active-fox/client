@@ -22,9 +22,9 @@ export default new Vuex.Store({
     mutateDataUser (state, payload) {
       state.dataUser = payload
     },
-    getRoomDatas(state, payload) {
+    getRoomDatas (state, payload) {
       state.roomDatas = payload
-      console.log(payload);
+      console.log(payload)
     }
   },
   actions: {
@@ -53,17 +53,7 @@ export default new Vuex.Store({
         })
         .then((docRef) => {
           console.log('success')
-          return db
-            .collection('Rooms')
-            .get()
-        })
-        .then(snapshot => {
-          let data = []
-          snapshot.forEach(doc => {
-            data.unshift({ id: doc.id, ...doc.data() })
-          })
-          commit('mutateRoom', data)
-          // console.log(data, '=============================')
+          console.log(docRef, '=============================')
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
@@ -80,12 +70,26 @@ export default new Vuex.Store({
     setUser ({ commit }, payload) {
       commit('mutateDataUser', payload)
     },
-    getRoomDatas({ commit }, payload) { //masih hardcode
+    getRoomDatas ({ commit }, payload) { // masih hardcode
+      console.log(payload, '============')
       db
-        .collection("Rooms").doc(payload)
-        .onSnapshot(function(doc) {
+        .collection('Rooms').doc(payload)
+        .onSnapshot(function (doc) {
           commit('getRoomDatas', doc.data())
-        });
+        })
     },
+
+    updateRoomDatas ({ commit }, payload) {
+      console.log(payload.id)
+      db
+        .collection('Rooms').doc(`${payload.id}`)
+        .update(payload.value)
+        .then((docRef) => {
+          console.log('success')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+    }
   }
 })

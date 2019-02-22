@@ -216,6 +216,8 @@
               </tr>
             </tbody>
           </table>
+          <h1>Black: {{ blackScore }}</h1>
+          <h1>White: {{ whiteScore }}</h1>
         </div>
       </div>
     </div>
@@ -223,110 +225,141 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
+import swal from 'sweetalert'
+
 export default {
-  data() {
+  data () {
     return {
-      board: {}
-    };
+      validCells: [],
+      board: {},
+      whiteScore: 0,
+      blackScore: 0
+    }
   },
-  created() {
-    this.$store.dispatch("getRoomDatas", this.$route.params.id);
+  created () {
+    this.$store.dispatch('getRoomDatas', this.$route.params.id)
   },
   computed: {
-    ...mapState(["roomDatas", "dataUser"])
+    ...mapState(['roomDatas', 'dataUser'])
   },
   watch: {
-    roomDatas() {
-      console.log(this.roomDatas.turn);
-      this.searchValidCell();
-      console.log(this.roomDatas.board);
+    roomDatas () {
+      this.countScore()
+      console.log(this.roomDatas.turn)
+      this.changeValidCell()
+      console.log(this.roomDatas.board)
     }
   },
   methods: {
-    removeValid() {
+    removeValid () {
       for (let key in this.roomDatas.board) {
-        if (this.roomDatas.board[key] === "valid") {
-          this.roomDatas.board[key] = null;
+        if (this.roomDatas.board[key] === 'valid') {
+          this.roomDatas.board[key] = null
         }
       }
     },
-    clickCell(id) {
-      console.log("hihih");
-      if (this.roomDatas.turn != localStorage.getItem("color")) {
-        alert("not your turn!");
+    countScore() {
+      this.whiteScore = 0
+      this.blackScore = 0
+      for (let key in this.roomDatas.board) {
+        if (!this.roomDatas.board[key]) {
+          continue
+        } else if (this.roomDatas.board[key].includes('black')) {
+          this.blackScore++
+        } else if(this.roomDatas.board[key].includes('white')) {
+          this.whiteScore++
+        }
+      }
+    },
+    clickCell (id) {
+      // console.log('hihih')
+      //   console.log(this.roomDatas.turn, localStorage.getItem('color'))
+      if(!this.validCells.length) {
+        this.noValid()
+      } else if (this.roomDatas.turn !== localStorage.getItem('color')) {
+        swal('not your turn!')
+        // this.roomDatas.turn = localStorage.getItem('token') == 'black' ? 'white' : 'black'
       } else {
-        if (this.roomDatas.board[id] == "valid") {
-          this.removeValid();
-          let color = localStorage.getItem("color");
-          this.roomDatas.board[id] = `stone ${color}`;
-          let row = id.split("-")[0];
-          let col = id.split("-")[1];
-          this.turnAllStones(row, col);
+        if (this.roomDatas.board[id] === 'valid') {
+          this.removeValid()
+          let color = localStorage.getItem('color')
+          this.roomDatas.board[id] = `stone ${color}`
+          let row = id.split('-')[0]
+          let col = id.split('-')[1]
+          this.turnAllStones(row, col)
           // alert('ini valid')
+          // console.log(this.roomDatas.id)
+          if (this.roomDatas.turn === 'black') {
+            this.roomDatas.turn = 'white'
+          } else {
+            this.roomDatas.turn = 'black'
+          }
+          this.$store.dispatch('updateRoomDatas', { id: this.roomDatas.id, value: this.roomDatas })
+          this.countScore()
         }
       }
       // this.board[id] = 'stone white'
     },
-    turnAllStones(row, col) {
-      this.turnLineStones(row, col, -1, -1);
-      this.turnLineStones(row, col, -1, 0);
-      this.turnLineStones(row, col, -1, 1);
-      this.turnLineStones(row, col, 0, -1);
-      this.turnLineStones(row, col, 0, 1);
-      this.turnLineStones(row, col, 1, -1);
-      this.turnLineStones(row, col, 1, 0);
-      this.turnLineStones(row, col, 1, 1);
+    turnAllStones (row, col) {
+      this.turnLineStones(row, col, -1, -1)
+      this.turnLineStones(row, col, -1, 0)
+      this.turnLineStones(row, col, -1, 1)
+      this.turnLineStones(row, col, 0, -1)
+      this.turnLineStones(row, col, 0, 1)
+      this.turnLineStones(row, col, 1, -1)
+      this.turnLineStones(row, col, 1, 0)
+      this.turnLineStones(row, col, 1, 1)
     },
-    turnLineStones(row, col, addRow, addCol) {
-      let rowCount = addRow;
-      let colCount = addCol;
-      let keys = [];
+    turnLineStones (row, col, addRow, addCol) {
+      let rowCount = addRow
+      let colCount = addCol
+      let keys = []
       for (let i = 0; i < 7; i++) {
         // const cell = getCellElement(row - rowCount, col - colCount)
-        let key = `${row - rowCount}-${col - colCount}`;
+        let key = `${row - rowCount}-${col - colCount}`
         if (
-          this.roomDatas.board[key] == undefined ||
-          this.roomDatas.board[key] == null ||
-          !this.roomDatas.board[key].includes("stone")
+          this.roomDatas.board[key] === undefined ||
+          this.roomDatas.board[key] === null ||
+          !this.roomDatas.board[key].includes('stone')
         ) {
-          return;
+          return
         }
         if (this.isMyStone(key)) {
           if (rowCount !== addRow || colCount !== addCol) {
-            this.turnStones(keys);
+            this.turnStones(keys)
           }
-          return;
+          return
         }
-        keys.push(key);
-        rowCount = rowCount + addRow;
-        colCount = colCount + addCol;
+        keys.push(key)
+        rowCount = rowCount + addRow
+        colCount = colCount + addCol
       }
-      return;
     },
-    turnStones(keys) {
+    turnStones (keys) {
       for (let i = 0; i < keys.length; i++) {
         this.roomDatas.board[keys[i]] = `stone ${localStorage.getItem('color')}`
       }
-      console.log('-----', this.roomDatas.board)
+      // console.log('-----', this.roomDatas.board)
     },
-    searchValidCell() {
+    changeValidCell () {
       // let total = 0
       for (const key in this.roomDatas.board) {
         if (this.roomDatas.board[key] === null) {
-          let row = key.split("-")[0];
-          let col = key.split("-")[1];
+          let row = key.split('-')[0]
+          let col = key.split('-')[1]
           // total++
           if (this.isValidCell(row, col)) {
-            console.log(key);
-
-            this.roomDatas.board[key] = "valid";
+            // console.log(key)
+            this.validCells.push(key)
+            this.roomDatas.board[key] = 'valid'
           }
         }
       }
+      this.gameOver()
       // console.log(total)
     },
-    isValidCell(row, col) {
+    isValidCell (row, col) {
       if (
         this.isValidLine(row, col, -1, -1) ||
         this.isValidLine(row, col, -1, 0) ||
@@ -337,49 +370,70 @@ export default {
         this.isValidLine(row, col, 1, 0) ||
         this.isValidLine(row, col, 1, 1)
       ) {
-        return true;
+        return true
       }
     },
-    isValidLine(row, col, addRow, addCol) {
-      let rowCount = addRow;
-      let colCount = addCol;
+    isValidLine (row, col, addRow, addCol) {
+      let rowCount = addRow
+      let colCount = addCol
       for (let i = 0; i < 7; i++) {
         // const cell = getCellElement(row - rowCount, col - colCount);
-        let key = `${row - rowCount}-${col - colCount}`;
+        let key = `${row - rowCount}-${col - colCount}`
         if (
-          this.roomDatas.board[key] == undefined ||
-          this.roomDatas.board[key] == null ||
-          !this.roomDatas.board[key].includes("stone")
+          this.roomDatas.board[key] === undefined ||
+          this.roomDatas.board[key] === null ||
+          !this.roomDatas.board[key].includes('stone')
         ) {
-          console.log();
-          return false;
+          console.log()
+          return false
         }
         if (this.isMyStone(key)) {
           if (rowCount === addRow && colCount === addCol) {
-            return false;
+            return false
           } else {
-            return true;
+            return true
           }
         }
-        rowCount = rowCount + addRow;
-        colCount = colCount + addCol;
+        rowCount = rowCount + addRow
+        colCount = colCount + addCol
       }
-      return false;
+      return false
     },
-    isMyStone(key) {
+    isMyStone (key) {
       if (
-        (this.roomDatas.turn === "black" &&
-          this.roomDatas.board[key].split(" ")[1] === "black") ||
-        (this.roomDatas.turn === "white" &&
-          this.roomDatas.board[key].split(" ")[1] === "white")
+        (this.roomDatas.turn === 'black' &&
+          this.roomDatas.board[key].split(' ')[1] === 'black') ||
+        (this.roomDatas.turn === 'white' &&
+          this.roomDatas.board[key].split(' ')[1] === 'white')
       ) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
+    },
+    gameOver () {
+      let isNull = false
+      for(let key in this.roomDatas.board){
+        if(!this.roomDatas.board[key] || this.roomDatas.board[key] == 'valid'){
+          console.log(this.roomDatas.board[key])
+          isNull = true
+        }
+      }
+      if (!isNull) {
+        swal(`game over`,`black : ${this.blackScore}. white: ${this.whiteScore}`, 'success')
+        .then(()=>{
+          this.$router.push({path:'/'})
+        })
+      }
+    },
+    noValid() {
+      swal(`you can't put anymore. game over`,`black : ${this.blackScore}. white: ${this.whiteScore}`)
+      .then(()=>{
+          this.$router.push({path:'/'})
+        })
     }
-  }
-};
+  },
+}
 </script>
 
 <style>
