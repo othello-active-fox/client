@@ -71,11 +71,24 @@ export default new Vuex.Store({
       commit('mutateDataUser', payload)
     },
     getRoomDatas({ commit }, payload) { //masih hardcode
+      console.log(payload, '============')
       db
         .collection("Rooms").doc(payload)
         .onSnapshot(function(doc) {
           commit('getRoomDatas', doc.data())
         });
     },
+
+    updateRoomDatas({ commit }, payload) {
+      db
+        .collection('Rooms').doc(`${payload.id}`)
+        .update(payload.value)
+        .then((docRef) => {
+          console.log('success')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+    }
   }
 })

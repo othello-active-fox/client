@@ -68,15 +68,16 @@ export default {
           // color = 'black'
           localStorage.setItem('color', 'black')
         }
-        this.updateRoom(this.selectedRoom)
+        this.$store.dispatch('updateRoomDatas', {id: this.selectedRoom.id, value: this.selectedRoom })
         this.$store.dispatch('setUser', {
           room: value.room,
           username: value.username,
           stone: color
         })
-
+        // console.log(this.selectedRoom)
         var unsubscribe = db.collection('Rooms').onSnapshot(function () {})
         unsubscribe()
+        // console.log(this.selectedRoom, '===================')
         this.$router.push({ path: `/waitingroom/${this.selectedRoom.id}` })
       }
     },

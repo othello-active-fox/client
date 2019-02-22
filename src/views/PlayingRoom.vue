@@ -252,6 +252,7 @@ export default {
       }
     },
     clickCell(id) {
+<<<<<<< HEAD
       console.log("hihih");
       if (this.roomDatas.turn != localStorage.getItem("color")) {
         alert("not your turn!");
@@ -380,6 +381,20 @@ export default {
     }
   }
 };
+=======
+      console.log('hihih');
+      let color = localStorage.getItem('color')
+      if(this.roomDatas.turn !== color) {
+        alert('not your turn')
+      } else { 
+          this.roomDatas.board[id] = 'stone white'
+        
+        this.$store.dispatch('updateRoomDatas', { id: this.$route.params.id, value: this.roomDatas })
+      }   // this.board[id] = 'stone white'
+    }
+  }
+}
+>>>>>>> fix waitingroom2
 </script>
 
 <style>

@@ -66,14 +66,11 @@ export default {
     //     })
     // },
     waitingPlayer () {
-      let id = this.$store.state.dataUser
-      console.log(id, '000000000000000000')
-      let roomId = this.$store.state.dataUser.room.id
       db.collection('Rooms')
-        .doc(`${roomId}`)
+        .doc(`${this.$route.params.id}`)
         .onSnapshot(doc => {
           if (doc.data().players.length === 2) {
-            this.$router.push({ path: `/playingroom/${roomId}` })
+            this.$router.push({ path: `/playingroom/${this.$route.params.id}` })
           }
         })
     }
