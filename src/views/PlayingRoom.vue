@@ -99,8 +99,21 @@ export default {
   created () {
 
     // console.log(this.board)
+    this.getRoomDatas()
+  },
+  computed: {
+    getBoard() {
+      return this.board
+    }
   },
   methods: {
+    getRoomDatas() {
+      db.collection("Rooms").doc("5xH80H4IK4dbxKJnv0M9")
+        .onSnapshot(function(doc) {
+            console.log("Current data: ", doc.data());
+        });
+
+    },
     clickCell(id) {
       console.log(id);
       this.board[id] = 'stone white'
