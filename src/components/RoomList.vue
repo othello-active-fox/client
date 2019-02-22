@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-layout class="container" v-for="(room, index) in rooms" :key="index" style="width:800px;">
+    <v-layout class="container" v-for="(room, index) in roomList" :key="index" style="width:800px;">
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
           <h4>Room Name: {{room.roomName}}</h4>
-          <h4>Room Capacty: {{room.capacity}}</h4>
+          <h4>Joined: {{room.players.length}}</h4>
           <div class="text-xs-center">
             <v-dialog v-model="dialog" width="500">
               <v-btn slot="activator" color="orange lighten-2" @click="enterRoom(room)" dark>Join Room</v-btn>
@@ -24,74 +24,77 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import db from '@/api/firestore.js'
 import Username from '@/components/Username.vue'
 
 export default {
-  data() {
+  data () {
     return {
       rooms: [],
       dialog: false,
       selectedRoom: {},
       username: ''
-    };
+    }
   },
   components: {
-      Username
+    Username
   },
   methods: {
-    enterRoom(room) {
+    enterRoom (room) {
       db
-        .collection("Rooms")
+        .collection('Rooms')
         .doc(`${room.id}`)
         .get()
         .then(doc => {
           this.selectedRoom = doc.data()
-          this.selectedRoom.id= doc.id
+          this.selectedRoom.id = doc.id
         })
         .catch(err => {
           console.log(err)
         })
     },
-    enteringPlayer(value) {
+    enteringPlayer (value) {
       if (this.selectedRoom.players.length >= 2) {
         alert('room penuh')
       } else {
         this.dialog = false
-        this.selectedRoom.players.push({name: value.username, action: ''})
+        if (!this.selectedRoom.players.length) {
+          this.selectedRoom.players.push({ name: value.username, stone: 'white' })
+        } else {
+          this.selectedRoom.players.push({ name: value.username, stone: 'black' })
+        }
         this.updateRoom(this.selectedRoom)
         this.$store.dispatch('setUser', {
           room: value.room,
           username: value.username
         })
-        this.$router.push({ path: `/waitingroom`}) 
+        this.$router.push({ path: `/waitingroom` })
       }
     },
-    updateRoom(value) {
+    updateRoom (value) {
       db
-        .collection("Rooms").doc(`${value.id}`)
+        .collection('Rooms').doc(`${value.id}`)
         .update(value)
         .then((docRef) => {
           console.log('success')
         })
         .catch(function (error) {
-          console.error("Error writing document: ", error);
-        });
+          console.error('Error writing document: ', error)
+        })
     }
   },
   computed: {
-    roomList() {
-      this.rooms = this.$store.state.roomList;
+    roomList () {
+      return this.$store.state.roomList
     }
   },
   watch: {
-    roomList(v) {
-      console.log("TEST");
-      console.log(v, "=++=++==+===+++==");
+    roomList (v) {
+      // console.log("TEST");
+      console.log(v, '=++=++==+===+++==')
     }
   }
-};
+}
 </script>
 
 <style>

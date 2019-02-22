@@ -3,7 +3,7 @@
     <v-layout align-start justify-center row fill-height>
     <CreateRoom></CreateRoom>
     <RoomList></RoomList>
-    </v-layout> 
+    </v-layout>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     CreateRoom,
     RoomList
   },
-  created() {
+  created () {
     this.$store.dispatch('getRoom')
   }
 }

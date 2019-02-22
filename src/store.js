@@ -12,43 +12,43 @@ export default new Vuex.Store({
     dataUser: {}
   },
   mutations: {
-    //siapin functio
-    mutateRoom(state, roomArr) {
+    mutateRoom (state, roomArr) {
       state.roomList = roomArr
     },
-    initialData(state, arrRoom) {
+    initialData (state, arrRoom) {
       state.roomList = arrRoom
     },
-    mutateDataUser(state, payload) {
+    mutateDataUser (state, payload) {
       state.dataUser = payload
     }
   },
   actions: {
-    createUser({ commit }, name) {
+    createUser ({ commit }, name) {
       db
-        .collection("Users")
+        .collection('Users')
         .add({
-          name: name,
+          name: name
         })
         .then((docRef) => {
-          console.log("Document successfully written with Id!", docRef.id);
+          console.log('Document successfully written with Id!', docRef.id)
         })
         .catch(function (error) {
-          console.error("Error writing document: ", error);
-        });
+          console.error('Error writing document: ', error)
+        })
     },
-    createRoom({ commit }, dataObj) {
+    createRoom ({ commit }, dataObj) {
       db
-        .collection("Rooms")
+        .collection('Rooms')
         .add({
           roomName: dataObj.roomName,
           capacity: dataObj.capacity,
-          players: []
+          players: [],
+          board: dataObj.board
         })
         .then((docRef) => {
           console.log('success')
           return db
-            .collection("Rooms")
+            .collection('Rooms')
             .get()
         })
         .then(snapshot => {
@@ -60,22 +60,18 @@ export default new Vuex.Store({
           // console.log(data, '=============================')
         })
         .catch(function (error) {
-          console.error("Error writing document: ", error);
-        });
+          console.error('Error writing document: ', error)
+        })
     },
-    getRoom({ commit }) {
+    getRoom ({ commit }) {
       db
-        .collection("Rooms")
+        .collection('Rooms')
         .onSnapshot(function (querySnapshot) {
-          const data = querySnapshot.docs.map(function (doc) {
-            return { id: doc.data().id, ...doc.data() }
-          })
+          const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
           commit('initialData', data)
         })
-
-
     },
-    setUser({ commit }, payload) {
+    setUser ({ commit }, payload) {
       commit('mutateDataUser', payload)
     }
   }

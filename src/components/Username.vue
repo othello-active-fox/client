@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="width:400px;">   
+    <div class="container" style="width:400px;">
         <v-form
             ref="form"
             v-if="isCreate"
@@ -25,22 +25,21 @@
 <script>
 
 export default {
-    props: ['room'],
-    data() {
-        return {
-            name: '',
-            isCreate: true
-        }
-    },
-    methods: {
-        createUser(){
-            this.$emit('username', {username: this.name, room: this.room})
-            this.name = ''
-        }
+  props: ['room'],
+  data () {
+    return {
+      name: '',
+      isCreate: true
     }
+  },
+  methods: {
+    createUser () {
+      this.$emit('username', { username: this.name, room: this.room })
+      this.name = ''
+    }
+  }
 }
 </script>
-
 
 <style>
 </style>

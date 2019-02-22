@@ -96,23 +96,8 @@
 
 <script>
 export default {
-  data() {
-    return {
-      board: {}
-    }
-  },
-  created() {
-    for (let i = 0; i <= 7; i++) {
-      for (let j = 0; j <= 7; j++) {
-        if (i === 3 && j === 3 || i === 4 && j === 4) {
-          this.board[`${i}-${j}`] = 'stone white'
-        } else if (i === 3 && j === 4 || i === 4 && j === 3) {
-          this.board[`${i}-${j}`] = 'stone black'
-        } else {
-          this.board[`${i}-${j}`] = null
-        }
-      }
-    }
+  created () {
+
     // console.log(this.board)
   },
   methods: {
@@ -120,11 +105,15 @@ export default {
       console.log(id);
       this.board[id] = 'stone white'
       console.log(this.board);
-
+    }
+  },
+  data () {
+    return {
+      board: {}
     }
   },
   computed: {
-    getBoard() {
+    getBoard () {
       return this.board
     }
   }
